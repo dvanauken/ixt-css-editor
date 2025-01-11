@@ -1,0 +1,62 @@
+// toolbar.component.scss
+.toolbar {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem;
+  background-color: var(--toolbar-background);
+  border-bottom: 1px solid var(--border-color);
+
+  &__group {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__button {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--button-background);
+    color: var(--text-color);
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background-color: var(--button-hover-background);
+    }
+
+    &:disabled {
+      opacity: 0.6;
+      cursor: not-allowed;
+    }
+
+    i {
+      font-size: 1rem;
+    }
+  }
+
+  &__file-input {
+    display: none;
+  }
+
+  &__status {
+    margin-left: auto;
+    padding: 0.5rem 1rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+
+    &--error {
+      background-color: var(--error-background);
+      color: var(--error-color);
+    }
+
+    &--success {
+      background-color: var(--success-background);
+      color: var(--success-color);
+    }
+  }
+}
+

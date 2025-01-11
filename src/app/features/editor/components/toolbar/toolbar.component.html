@@ -1,0 +1,71 @@
+// toolbar.component.html
+<nav class="toolbar">
+  <div class="toolbar__group">
+    <button 
+      class="toolbar__button" 
+      (click)="emitAction('add')" 
+      [disabled]="!canAdd"
+      aria-label="Add Rule">
+      <i class="fas fa-plus"></i>
+      <span>Add Rule</span>
+    </button>
+    <button 
+      class="toolbar__button" 
+      (click)="emitAction('delete')" 
+      [disabled]="!canDelete"
+      aria-label="Delete">
+      <i class="fas fa-trash"></i>
+      <span>Delete</span>
+    </button>
+  </div>
+
+  <div class="toolbar__group">
+    <button 
+      class="toolbar__button" 
+      (click)="emitAction('undo')" 
+      [disabled]="!canUndo"
+      aria-label="Undo">
+      <i class="fas fa-undo"></i>
+      <span>Undo</span>
+    </button>
+    <button 
+      class="toolbar__button" 
+      (click)="emitAction('redo')" 
+      [disabled]="!canRedo"
+      aria-label="Redo">
+      <i class="fas fa-redo"></i>
+      <span>Redo</span>
+    </button>
+  </div>
+
+  <div class="toolbar__group">
+    <button 
+      class="toolbar__button" 
+      (click)="emitAction('save')"
+      aria-label="Save">
+      <i class="fas fa-save"></i>
+      <span>Save</span>
+    </button>
+    <button 
+      class="toolbar__button" 
+      (click)="openFileInput()"
+      aria-label="Load">
+      <i class="fas fa-folder-open"></i>
+      <span>Load</span>
+    </button>
+    <input
+      #fileInput
+      type="file"
+      accept=".css"
+      (change)="handleFileInput($event)"
+      class="toolbar__file-input"
+    >
+  </div>
+
+  <div class="toolbar__status" *ngIf="validationMessage"
+       [class.toolbar__status--error]="hasError"
+       [class.toolbar__status--success]="!hasError">
+    {{ validationMessage }}
+  </div>
+</nav>
+

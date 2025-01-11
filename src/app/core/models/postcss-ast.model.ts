@@ -1,6 +1,14 @@
 import { Root, Rule, Declaration, AtRule, Comment, ChildNode } from 'postcss';
-import { PostCSSASTNode, RuleNode, DeclarationNode, AtRuleNode, CommentNode } from '../interfaces/parser.interfaces';
+import { 
+  PostCSSASTNode, 
+  RuleNode, 
+  DeclarationNode, 
+  AtRuleNode, 
+  CommentNode,
+  PostCSSSource  // Add this import
+} from '../interfaces/parser.interfaces';
 import * as postcss from 'postcss';
+
 
 export class PostCSSASTModel {
   private root: Root;
@@ -76,19 +84,20 @@ export class PostCSSASTModel {
     };
   }
 
-  private extractSource(node: any) {
-    if (node.source) {
-      return {
-        start: {
-          line: node.source.start?.line || 0,
-          column: node.source.start?.column || 0
-        },
-        end: {
-          line: node.source.end?.line || 0,
-          column: node.source.end?.column || 0
-        }
-      };
-    }
-    return undefined;
+
+  private extractSource(node: any): PostCSSSource | undefined {
+    if (!node.source) return undefined;
+    
+    return {
+      input: node.source.input,
+      start: {
+        line: node.source.start?.line,
+        column: node.source.start?.column
+      },
+      end: {
+        line: node.source.end?.line,
+        column: node.source.end?.column
+      }
+    };
   }
 }

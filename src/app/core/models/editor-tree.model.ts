@@ -10,7 +10,9 @@ export interface EditorNode {
   metadata: NodeMetadata;
 }
 
+import { ValidationError } from '@core/interfaces/tree.interfaces';
 import { Source } from 'postcss';
+
 
 export interface NodeMetadata {
   selector?: string;
@@ -21,6 +23,7 @@ export interface NodeMetadata {
   atRuleParams?: string;
   commentText?: string;
   source?: Source;
+  errors?: ValidationError[];  // Add this line
 }
 
 export class EditorTreeModel {

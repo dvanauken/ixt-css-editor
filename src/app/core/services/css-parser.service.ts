@@ -4,6 +4,15 @@ import { Observable, from, catchError, map } from 'rxjs';
 import { CSSParserConfig, ParserResult, ParserError } from '../interfaces/parser.interfaces';
 import { PostCSSASTModel } from '../models/postcss-ast.model';
 
+// Add this interface
+interface CssWarning {
+  text: string;
+  line?: number;
+  column?: number;
+  severity: 'warning';
+}
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -68,4 +77,26 @@ export class CSSParserService {
       severity: 'error'
     };
   }
+
+  validateCss(css: string): string {
+    try {
+      const result = postcss.parse(css);
+      return result.toString();
+    } catch (error) {
+      throw new Error('Invalid CSS');
+    }
+  }
+
+
+
+  // Then update the formatWarning method to use this interface
+  private formatWarning(warning: Warning): CssWarning {
+    return {
+      text: warning.text,
+      line: warning.line,
+      column: warning.column,
+      severity: 'warning'
+    };
+  }
+
 }

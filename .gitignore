@@ -41,3 +41,6 @@ temp/
 # pnpm-lock.yaml
 
 result.*.txt
+
+# Angular cache
+/.angular

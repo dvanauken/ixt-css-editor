@@ -1,0 +1,59 @@
+// preview.component.scss
+.preview {
+  margin: 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  background-color: var(--background-color);
+
+  &__header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border-bottom: 1px solid var(--border-color);
+  }
+
+  &__title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 500;
+  }
+
+  &__controls {
+    display: flex;
+    gap: 0.5rem;
+  }
+
+  &__button {
+    padding: 0.5rem 1rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: var(--button-background);
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background-color: var(--button-hover-background);
+    }
+  }
+
+  &__content {
+    padding: 1rem;
+  }
+
+  &__frame {
+    padding: 1.25rem;
+    border: 1px solid var(--border-color);
+    border-radius: 0.25rem;
+    background-color: white;
+    min-height: 200px;
+  }
+
+  &__error {
+    margin-top: 1rem;
+    padding: 1rem;
+    border-radius: 0.25rem;
+    background-color: var(--error-background);
+    color: var(--error-color);
+  }
+}

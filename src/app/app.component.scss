@@ -1,0 +1,36 @@
+/* app.component.scss */
+:host {
+  display: block;
+  height: 100vh;
+  width: 100vw;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+}
+
+.editor-layout {
+  display: flex;
+  flex: 1;
+  overflow: hidden;
+}
+
+.editor-panel {
+  flex: 1;
+  min-width: 300px;
+  border-right: 1px solid var(--border-color);
+  overflow: auto;
+}
+
+.preview-panel {
+  flex: 2;
+  overflow: auto;
+}
+
+:root {
+  --border-color: #e0e0e0;
+}

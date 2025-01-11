@@ -1,5 +1,5 @@
 import { EditorNode } from '@core/models/editor-tree.model';
-import { Root, Node, Rule, Declaration } from 'postcss';
+import { Root, Node, Rule, Declaration, Input } from 'postcss';
 
 export interface CSSParserConfig {
   sourcemap?: boolean;
@@ -20,7 +20,6 @@ export interface ParserError {
   severity: 'error' | 'warning';
 }
 
-import { Source } from 'postcss';
 
 // Node Types
 export interface PostCSSASTNode {
@@ -120,4 +119,23 @@ export interface TransformationResult {
 export interface ASTTransformer {
   transformToEditorTree(ast: Root): EditorNode;
   transformToPostCSS(node: EditorNode): Root;
+}
+
+export interface Source {
+  input: Input;
+  start: { line: number; column: number };
+  end: { line: number; column: number };
+}
+
+export interface PostCSSSource {
+  input: Input;
+  start: { line: number; column: number };
+  end: { line: number; column: number };
+}
+
+export interface PostCSSASTNode {
+  type: string;
+  source?: PostCSSSource;
+  nodes?: PostCSSASTNode[];
+  parent?: PostCSSASTNode;
 }

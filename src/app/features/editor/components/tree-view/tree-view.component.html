@@ -1,0 +1,74 @@
+<div class="tree-view-container">
+  <div class="tree-nodes">
+    <ng-container>
+      <div *ngFor="let node of (nodes$ | async)?.children" 
+           class="node"
+           [class.selected]="node.id === editingNode?.id"
+           [class.has-errors]="hasErrors(node)"
+           [class.has-warnings]="hasWarnings(node)"
+           [class.disabled]="!node.enabled"
+           (click)="onNodeSelect(node)">
+        <div class="node-header">
+          <span class="node-type">{{node.type}}</span>
+          <span class="node-preview">
+            {{node.type === 'rule' ? node.metadata.selector :
+              node.type === 'declaration' ? node.metadata.property :
+              node.metadata.value}}
+          </span>
+        </div>
+        <div *ngIf="node.metadata.errors?.length" class="node-errors">
+          <div *ngFor="let error of node.metadata.errors"
+               class="error-message"
+               [class.warning]="error.severity === 'warning'">
+            {{error.message}}
+          </div>
+        </div>
+      </div>
+    </ng-container>
+  </div>
+
+  <div class="node-editor" *ngIf="editingNode">
+    <form [formGroup]="nodeForm" (ngSubmit)="onSubmit()">
+      <div class="form-group" *ngIf="editingNode.type === 'rule'">
+        <label for="selector">Selector</label>
+        <input id="selector"
+               type="text"
+               formControlName="selector"
+               [class.error]="editingNode && hasErrors(editingNode)">
+      </div>
+
+      <div class="form-group" *ngIf="editingNode.type === 'declaration'">
+        <label for="property">Property</label>
+        <input id="property"
+               type="text"
+               formControlName="property"
+               [class.error]="editingNode && hasErrors(editingNode)">
+        
+        <label for="value">Value</label>
+        <input id="value"
+               type="text"
+               formControlName="value"
+               [class.error]="editingNode && hasErrors(editingNode)">
+        
+        <div class="important-toggle">
+          <input id="important"
+                 type="checkbox"
+                 formControlName="important">
+          <label for="important">Important</label>
+        </div>
+      </div>
+
+      <div class="form-group" *ngIf="editingNode.type === 'comment'">
+        <label for="comment">Comment</label>
+        <textarea id="comment"
+                  formControlName="value"
+                  rows="3"></textarea>
+      </div>
+
+      <button type="submit"
+              [disabled]="!nodeForm.valid || !nodeForm.dirty">
+        Update
+      </button>
+    </form>
+  </div>
+</div>

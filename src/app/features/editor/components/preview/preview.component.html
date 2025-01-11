@@ -1,0 +1,22 @@
+// preview.component.html
+<article class="preview">
+  <header class="preview__header">
+    <h3 class="preview__title">Live Preview</h3>
+    <div class="preview__controls">
+      <button class="preview__button" (click)="togglePreview()">
+        {{ isPreviewVisible ? 'Hide Preview' : 'Show Preview' }}
+      </button>
+      <button class="preview__button" (click)="refreshPreview()">Refresh</button>
+    </div>
+  </header>
+  
+  <section class="preview__content" *ngIf="isPreviewVisible">
+    <div class="preview__frame">
+      <div [innerHTML]="previewContent"></div>
+    </div>
+    
+    <div class="preview__error" *ngIf="error">
+      {{ error }}
+    </div>
+  </section>
+</article>
